@@ -1,6 +1,6 @@
 === WP-Cache.com ===
 Contributors: phatjay
-Tags: developer, security, performance, antivirus, virus, malware, cache, tools, qore, core
+Tags: cache, wp cache, caching, wp super cache, w3tc
 Requires at least: 3.3
 Tested up to: 3.8.1
 Stable tag: 4.8
