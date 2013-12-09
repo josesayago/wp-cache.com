@@ -29,7 +29,11 @@ Once activated, please update your options via the WP-Cache.com menu located wit
 
 = How do I know if the plugin is working?  =
 
-Once you have turned 'On' Frontent Caching from the WP-Cache.com menu within your wp-admin, you simple can log out of WordPress and head on over to your frontend. Once there, just refresh the page, then look at the source code of your homepage. You will see at the very end of the source code just below the closing </html> tag a comment indicating that WP-Cache.com generated the page from cache. 
+Once you have turned 'On' Frontend Caching from the WP-Cache.com menu within your wp-admin, you simple can log out of WordPress and head on over to your frontend. Once there, just refresh the page, then look at the source code of your homepage. You will see at the very end of the source code just below the closing </html> tag a comment indicating that WP-Cache.com generated the page from cache. 
+
+= Does WP-Cache.com cache the wp-admin backend?  =
+
+No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com doesnt even serve cached files to the admin.
 
 == Changelog ==
 
