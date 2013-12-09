@@ -7,7 +7,7 @@ Stable tag: 4.8
 License: GNU GPL 3.0
 License URI: http://www.gnu.org/licenses/gpl.html
 
-WordPress Security, Developer Tools Plugin.
+The easiest, fastest, most light-weight WordPress Cache plugin available.
 
 == Description ==
 
