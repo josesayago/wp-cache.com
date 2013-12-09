@@ -17,7 +17,7 @@ This project is maintained on <a target="_blank" href="https://github.com/icrypt
 
 == Installation ==
 
-This will activate the WP Qore WordPress Plugin.
+This will activate the WP-Cache.com WordPress Plugin.
 
 1. Upload `wp-qore` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
