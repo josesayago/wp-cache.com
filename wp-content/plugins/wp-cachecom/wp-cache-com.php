@@ -27,11 +27,11 @@ License URI: http://www.gnu.org/licenses/gpl.html
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // enqueue css
-function load_settings_wp_admin_style(){
+function wpcache_wp_admin_style(){
     wp_register_style( 'wpcache_wp_admin_css', plugins_url( 'css/style.css' , __FILE__ ), false, '1.0.0' );
     wp_enqueue_style( 'wpcache_wp_admin_css' );
 }
-add_action('admin_enqueue_scripts', 'load_settings_wp_admin_style');
+add_action('admin_enqueue_scripts', 'wpcache_wp_admin_style');
 
 // Add required includes
 require_once(dirname(__FILE__)."/inc/functions.php");
