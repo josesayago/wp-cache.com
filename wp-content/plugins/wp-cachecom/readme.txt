@@ -37,8 +37,13 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 
 == Changelog ==
 
+= 1.0.1 =
+* Renamed function in index.php to avoid conflict.
+
 = 1.0.0 =
 * Initial Release
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+* Upgrade to latest release
