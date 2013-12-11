@@ -8,6 +8,8 @@ Author: Jason Jersey
 Author URI: http://twitter.com/degersey
 License: GNU GPL 3.0
 License URI: http://www.gnu.org/licenses/gpl.html
+Text Domain: wpcache
+Domain Path: /lang
 */
 
 
