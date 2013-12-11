@@ -25,7 +25,7 @@
 		}
 
 		public function add_localization() {
-			load_plugin_textdomain('wpcache', false, dirname(plugin_basename(__FILE__)));
+			load_plugin_textdomain('wpcache', false, dirname(plugin_basename(__FILE__)).'/lang/' );
 		}
 
 		public function Add_Editor_Button(){
