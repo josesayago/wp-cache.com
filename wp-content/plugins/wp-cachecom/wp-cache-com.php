@@ -3,7 +3,7 @@
 Plugin Name: WP-Cache.com
 Plugin URI: http://wp-cache.com/
 Description: The easiest and fastest WordPress Cache plugin. WP-Cache.com, it just works!
-Version: 1.0.1
+Version: 1.0.2
 Author: Jason Jersey
 Author URI: http://twitter.com/degersey
 License: GNU GPL 3.0
