@@ -37,6 +37,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 
 == Changelog ==
 
+= 1.0.2 =
+* Added localization support (Contributed by: Kenth Hagström via by https://github.com/keha76 )
+
 = 1.0.1 =
 * Renamed function in index.php to avoid conflict.
 
@@ -44,6 +47,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+* Upgrade to latest release
 
 = 1.0.1 =
 * Upgrade to latest release
