@@ -37,6 +37,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 
 == Changelog ==
 
+= 1.0.3 =
+* Fixed minor bug on line 163 of functions.php involving a double spaced underscore.
+
 = 1.0.2 =
 * Added localization support (Contributed by: Kenth Hagström via by https://github.com/keha76 )
 
@@ -47,6 +50,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+* Upgrade to fix minor bug
 
 = 1.0.2 =
 * Upgrade to latest release
