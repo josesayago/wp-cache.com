@@ -1,5 +1,5 @@
 === WP-Cache.com ===
-Contributors: phatjay
+Contributors: phatjay, keha76
 Tags: cache, wp cache, caching, wp super cache, w3tc
 Requires at least: 3.3
 Tested up to: 3.8.1
