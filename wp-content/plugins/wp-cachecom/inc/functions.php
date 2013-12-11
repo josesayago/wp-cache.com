@@ -160,7 +160,7 @@
 <input type="checkbox" <?php echo $WPCache_NewPost; ?> id="WPCache_NewPost" name="WPCache_NewPost">
 <label><i></i></label>
 </div>
-<i><?php __e( 'Turn "On" to enable', 'wpcache' ); ?></i><br>
+<i><?php _e( 'Turn "On" to enable', 'wpcahce' ); ?></i><br>
 <?php _e( 'Clear all cache files when a post or page is published.', 'wpcache' ); ?>
 </label>
 </td>
