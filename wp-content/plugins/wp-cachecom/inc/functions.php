@@ -12,6 +12,7 @@
 		private $Block_Cache = false;
 
 		public function __construct(){
+			add_action('init', array($this, 'add_localization') );
 			$this->Set_WP_Con_DIR();
 			$this->Set_Options();
 			$this->Detect_New_Post();
@@ -21,6 +22,10 @@
 				$this->Set_Cronjob_Settings();
 				$this->Add_Editor_Button();
 			}
+		}
+
+		public function add_localization() {
+			load_plugin_textdomain('wpcache', false, dirname(plugin_basename(__FILE__)));
 		}
 
 		public function Add_Editor_Button(){
@@ -103,7 +108,7 @@
 
 		public function register_WPCache_menu(){
 			if(function_exists('add_menu_page')){ 
-                            add_menu_page('WP-Cache.com', 'WP-Cache.com', 'manage_options', __FILE__, array($this, 'OptionsPage'));
+                            add_menu_page( __( 'WP-Cache.com', 'wpcache' ), __( 'WP-Cache.com', 'wpcache' ), 'manage_options', __FILE__, array($this, 'OptionsPage'));
 			}
 		}
 
@@ -117,7 +122,7 @@
 ?>
 
 <div class="wrap">
-<div id="icon-options-general" class="icon32"><br></div><h2>WP-Cache.com Options</h2>
+<div id="icon-options-general" class="icon32"><br></div><h2><?php _e( 'WP-Cache.com Options', 'wpcahce'); ?></h2>
 				
 	<?php if($this->System_Message){ ?>
 		<div class="updated <?php echo $this->System_Message[1]; ?>" id="message"><p><?php echo $this->System_Message[0]; ?></p></div>
@@ -131,32 +136,32 @@
 <table class="form-table">
 <tbody>
 
-<h3>General Options</h3>
+<h3><?php _e( 'General Options', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b>Cache Frontend</b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Cache Frontend', 'wpcahce' ); ?></b></label></th>
 <td>
 <label for="WPCache_Status">
 <div class="switch toggle3">
 <input type="checkbox" <?php echo $WPCache_Status; ?> id="WPCache_Status" name="WPCache_Status">
 <label><i></i></label>
 </div>
-<i>Turn 'On' to enable</i><br>
-This will cache all frontend posts, pages including your homepage. Cached files are only served to non logged in users.
+<i><?php _e( 'Turn "On" to enable', 'wpcahce' ); ?></i><br>
+<?php _e( 'This will cache all frontend posts, pages including your homepage. Cached files are only served to non logged in users.', 'wpcache' ); ?>
 </label>
 </td>
 </tr>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b>New Post or Page</b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'New Post or Page', 'wpcahce' ); ?></b></label></th>
 <td>
 <label for="WPCache_NewPost">
 <div class="switch toggle3">
 <input type="checkbox" <?php echo $WPCache_NewPost; ?> id="WPCache_NewPost" name="WPCache_NewPost">
 <label><i></i></label>
 </div>
-<i>Turn 'On' to enable</i><br>
-Clear all cache files when a post or page is published.
+<i><?php __e( 'Turn "On" to enable', 'wpcache' ); ?></i><br>
+<?php _e( 'Clear all cache files when a post or page is published.', 'wpcache' ); ?>
 </label>
 </td>
 </tr>
@@ -181,13 +186,13 @@ Clear all cache files when a post or page is published.
 <table class="form-table">
 <tbody>
 
-<h3>Delete Cache</h3>
+<h3><?php _e( 'Delete Cache', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b>Clear all cache</b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_Delete_All_Cache">
-<i>Target folder:</i><br>
+<i><?php _e( 'Target folder:', 'wpcache' ); ?></i><br>
 
 <pre style="margin-top:10px;background:#FFFFFF;padding:10px;border: 1px dashed #CCCCCC;">
 <b><?php echo $this->WP_con_DIR; ?>/cache/all</b>
@@ -243,12 +248,12 @@ border-top: 1px solid #e1e1e1;
 				}else if(@mkdir($this->WP_con_DIR."/cache/tmpWPCache", 0755, true)){
 					rename($this->WP_con_DIR."/cache/all", $this->WP_con_DIR."/cache/tmpWPCache/".time());
 					wp_schedule_single_event(time() + 60, $this->slug."TmpDelete");
-					$this->System_Message = array("All cache files have been deleted","success");
+					$this->System_Message = array( __( 'All cache files have been deleted', 'wpcache' ),"success");
 				}else{
-					$this->System_Message = array("Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>", "error");
+					$this->System_Message = array( __( 'Permission of <strong>/wp-content/cache</strong> must be <strong>755</strong>', 'wpcache' ), "error");
 				}
 			}else{
-				$this->System_Message = array("Cache deleted","success");
+				$this->System_Message = array( __( 'Cache deleted', 'wpcache' ),"success");
 			}
 		}
 
@@ -328,13 +333,13 @@ border-top: 1px solid #e1e1e1;
 					$htaccess = $this->insertRewriteRule($htaccess);
 					$this->insertGzipRule($htaccess, $post);
 				}else{
-					return array(".htacces is not writable", "error");
+					return array( __( ".htacces is not writable", 'wpcache' ), "error");
 				}
-				return array("Options saved", "success");
+				return array( __( "Options saved", 'wpcache' ), "success");
 			}else{
 				//disable
 				$this->deleteCache();
-				return array("Options saved", "success");
+				return array( __( "Options saved", 'wpcache' ), "success");
 			}
 		}
 
