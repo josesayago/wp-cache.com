@@ -235,6 +235,8 @@ border-top: 1px solid #e1e1e1;
 			if(isset($this->Options->WPCache_NewPost) && isset($this->Options->WPCache_Status)){
 				add_filter ('publish_post', array($this, 'deleteCache'));
 				add_filter ('delete_post', array($this, 'deleteCache'));
+				add_filter ('publish_page', array($this, 'deleteCache'));
+				add_filter ('delete_page', array($this, 'deleteCache'));
 			}
 		}
 
