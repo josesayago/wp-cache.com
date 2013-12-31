@@ -37,6 +37,12 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 
 == Changelog ==
 
+= 1.0.5 =
+* Fixed bug: Cache would not delete for pages when a change was being made to pages. This is resolved.
+
+= 1.0.4 =
+* Mild correction.
+
 = 1.0.3 =
 * Fixed minor bug on line 163 of functions.php involving a double spaced underscore.
 
@@ -50,6 +56,12 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.0.5 =
+* Upgrade to latest version.
+
+= 1.0.4 =
+* Upgrade to latest version.
 
 = 1.0.3 =
 * Upgrade to fix minor bug
