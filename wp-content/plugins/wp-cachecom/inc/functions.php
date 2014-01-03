@@ -27,6 +27,43 @@
 			load_plugin_textdomain('wpcache', false, dirname(plugin_basename(__FILE__)).'/lang/' );
 		}
 
+		public function checkShortCode($content){
+			preg_match("/\[NoCache\]/", $content, $NoCache);
+			if(count($NoCache) > 0){
+				if(is_single() || is_page()){
+					$this->Block_Cache = true;
+				}
+				$content = str_replace("[NoCache]", "", $content);
+			}
+			return $content;
+		}
+
+		public function wpcache_buttonhooks() {
+		   // Only add hooks when the current user has permissions AND is in Rich Text editor mode
+		   if ( ( current_user_can('edit_posts') || current_user_can('edit_pages') ) && get_user_option('rich_editing') ) {
+		     add_filter("mce_external_plugins", array($this, "wpcache_register_tinymce_javascript"));
+		     add_filter('mce_buttons', array($this, 'wpcache_register_buttons'));
+		   }
+		}
+		// Load the TinyMCE plugin : editor_plugin.js (wp2.5)
+		public function wpcache_register_tinymce_javascript($plugin_array) {
+		   $plugin_array['wpcache'] = plugins_url('../js/button.js?v='.time(),__file__);
+		   return $plugin_array;
+		}
+
+		public function wpcache_register_buttons($buttons) {
+		   array_push($buttons, 'wpcache');
+		   return $buttons;
+		}
+
+		public function Add_Quicktags_Editor_Button(){
+			if (wp_script_is('quicktags')){ ?>
+				<script type="text/javascript">
+				    QTags.addButton('wpcache_not', 'NoCache', '[NoCache]', '', '', 'Block caching for this page');
+			    </script>
+		    <?php }
+		}
+
 		public function deactivate(){
 		if(is_file(ABSPATH.".htaccess") && is_writable(ABSPATH.".htaccess")){
 		    $htaccess = file_get_contents(ABSPATH.".htaccess");
@@ -96,7 +133,7 @@
 <h3><?php _e( 'General Options', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row">&nbsp;&nbsp;&nbsp;<label for="home"><b><?php _e( 'Cache Frontend', 'wpcahce' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Cache Frontend', 'wpcahce' ); ?></b></label></th>
 <td>
 <label for="WPCache_Status">
 <div class="switch toggle3">
@@ -110,7 +147,7 @@
 </tr>
 
 <tr valign="top">
-<th scope="row">&nbsp;&nbsp;&nbsp;<label for="home"><b><?php _e( 'New Post or Page', 'wpcahce' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'New Post or Page', 'wpcahce' ); ?></b></label></th>
 <td>
 <label for="WPCache_NewPost">
 <div class="switch toggle3">
@@ -146,7 +183,7 @@
 <h3><?php _e( 'Delete Cache', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row">&nbsp;&nbsp;&nbsp;<label for="home"><b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_Delete_All_Cache">
 <i><?php _e( 'Target folder:', 'wpcache' ); ?></i><br>
