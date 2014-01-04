@@ -122,7 +122,7 @@
 ?>
 
 <div class="wrap">
-<div id="icon-options-general" class="icon32"><br></div><h2><?php _e( 'WP-Cache.com Options', 'wpcahce'); ?></h2>
+<div id="icon-options-general" class="icon32"><br></div><h2><?php _e( 'WP-Cache.com Options', 'wpcache'); ?></h2>
 				
 	<?php if($this->System_Message){ ?>
 		<div class="updated <?php echo $this->System_Message[1]; ?>" id="message"><p><?php echo $this->System_Message[0]; ?></p></div>
@@ -139,28 +139,28 @@
 <h3><?php _e( 'General Options', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b><?php _e( 'Cache Frontend', 'wpcahce' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Cache Frontend', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_Status">
 <div class="switch toggle3">
 <input type="checkbox" <?php echo $WPCache_Status; ?> id="WPCache_Status" name="WPCache_Status">
 <label><i></i></label>
 </div>
-<i><?php _e( 'Turn "On" to enable', 'wpcahce' ); ?></i><br>
+<i><?php _e( 'Turn "On" to enable', 'wpcache' ); ?></i><br>
 <?php _e( 'This will cache all frontend posts, pages including your homepage. Cached files are only served to non logged in users.', 'wpcache' ); ?>
 </label>
 </td>
 </tr>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b><?php _e( 'New Post or Page', 'wpcahce' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'New Post or Page', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_NewPost">
 <div class="switch toggle3">
 <input type="checkbox" <?php echo $WPCache_NewPost; ?> id="WPCache_NewPost" name="WPCache_NewPost">
 <label><i></i></label>
 </div>
-<i><?php _e( 'Turn "On" to enable', 'wpcahce' ); ?></i><br>
+<i><?php _e( 'Turn "On" to enable', 'wpcache' ); ?></i><br>
 <?php _e( 'Clear all cache files when a post or page is published.', 'wpcache' ); ?>
 </label>
 </td>
