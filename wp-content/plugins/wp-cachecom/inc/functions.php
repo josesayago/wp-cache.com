@@ -139,7 +139,7 @@
 <h3><?php _e( 'General Options', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b><?php _e( 'Cache Frontend', 'wpcache' ); ?></b></label></th>
+<th scope="row"><label for="home">&nbsp;&nbsp;&nbsp;<b><?php _e( 'Cache Frontend', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_Status">
 <div class="switch toggle3">
@@ -153,7 +153,7 @@
 </tr>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b><?php _e( 'New Post or Page', 'wpcache' ); ?></b></label></th>
+<th scope="row"><label for="home">&nbsp;&nbsp;&nbsp;<b><?php _e( 'New Post or Page', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_NewPost">
 <div class="switch toggle3">
@@ -189,7 +189,7 @@
 <h3><?php _e( 'Delete Cache', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row"><label for="home"><b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
+<th scope="row"><label for="home">&nbsp;&nbsp;&nbsp;<b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_Delete_All_Cache">
 <i><?php _e( 'Target folder:', 'wpcache' ); ?></i><br>
