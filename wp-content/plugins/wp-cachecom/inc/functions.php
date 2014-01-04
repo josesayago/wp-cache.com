@@ -20,11 +20,17 @@
 			if(is_admin()){
 				$this->OptionsPanelRequest();
 				$this->Set_Cronjob_Settings();
+				$this->Add_Editor_Button();
 			}
 		}
 
 		public function add_localization() {
 			load_plugin_textdomain('wpcache', false, dirname(plugin_basename(__FILE__)).'/lang/' );
+		}
+
+		public function Add_Editor_Button(){
+			add_action('admin_print_footer_scripts', array($this, 'Add_Quicktags_Editor_Button'));
+			add_action('init', array($this, 'wpcache_buttonhooks'));
 		}
 
 		public function checkShortCode($content){
@@ -133,7 +139,7 @@
 <h3><?php _e( 'General Options', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row">&nbsp;&nbsp;&nbsp;<label for="home"><b><?php _e( 'Cache Frontend', 'wpcahce' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Cache Frontend', 'wpcahce' ); ?></b></label></th>
 <td>
 <label for="WPCache_Status">
 <div class="switch toggle3">
@@ -147,7 +153,7 @@
 </tr>
 
 <tr valign="top">
-<th scope="row">&nbsp;&nbsp;&nbsp;<label for="home"><b><?php _e( 'New Post or Page', 'wpcahce' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'New Post or Page', 'wpcahce' ); ?></b></label></th>
 <td>
 <label for="WPCache_NewPost">
 <div class="switch toggle3">
@@ -183,7 +189,7 @@
 <h3><?php _e( 'Delete Cache', 'wpcache' ); ?></h3>
 
 <tr valign="top">
-<th scope="row">&nbsp;&nbsp;&nbsp;<label for="home"><b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
+<th scope="row"><label for="home"><b><?php _e( 'Clear all cache', 'wpcache' ); ?></b></label></th>
 <td>
 <label for="WPCache_Delete_All_Cache">
 <i><?php _e( 'Target folder:', 'wpcache' ); ?></i><br>
