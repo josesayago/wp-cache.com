@@ -37,6 +37,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 
 == Changelog ==
 
+= 1.0.7 =
+* Fixed NoCache Button for Posts and Pages
+
 = 1.0.6 =
 * Fixed bug associated with Add_Editor_Button() within posts.
 
@@ -59,6 +62,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.0.7 =
+* Upgrade to latest version.
 
 = 1.0.6 =
 * Upgrade to latest version.
