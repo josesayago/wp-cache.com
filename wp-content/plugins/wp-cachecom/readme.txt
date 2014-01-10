@@ -37,6 +37,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 
 == Changelog ==
 
+= 1.1.0 =
+* Fixed errors in translation files.
+
 = 1.0.9 =
 * Added language support for Deutsch/Deutschland (de_DE), Español/México (es_MX), Français/France (fr_FR), Italiano/Italia (it_IT), and Svenska/Sverige (sv_SE).
 
@@ -68,6 +71,9 @@ No. WP-Cache.com does not cache the wp-admin backend. In fact, WP-Cache.com does
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+* Upgrade to latest version.
 
 = 1.0.9 =
 * Upgrade to latest version.
