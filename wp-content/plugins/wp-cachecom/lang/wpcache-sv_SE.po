@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WP-Cache.com v1.0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-01-04 04:09:40+0000\n"
+"PO-Revision-Date: 2014-01-10 00:10:27+0000\n"
 "Last-Translator: admin <enqinet@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Cache Frontend"
 #: inc/functions.php:163
 #@ wpcache
 msgid "Turn \"On\" to enable"
-msgstr "Aktivera \"On\" för att aktivera"
+msgstr "Aktivera 'On' för att aktivera"
 
 #: inc/functions.php:150
 #@ wpcache
