@@ -459,7 +459,7 @@ border-top: 1px solid #e1e1e1;
 					"<IfModule mod_rewrite.c>"."\n".
 					"RewriteEngine On"."\n".
 					"RewriteBase /"."\n".
-					"RewriteCond %{HTTP_HOST} ^(www\.)?".$this->WP_blog_Url."\.com [NC]"."\n".
+					"RewriteCond %{HTTP_HOST} ^(www\.)?".$this->WP_blog_Url." [NC]"."\n".
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".
 					"RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n".
