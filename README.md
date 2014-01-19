@@ -6,7 +6,7 @@ The easiest, fastest, most light-weight WordPress Cache plugin available.
 
 This will activate the WP-Cache.com WordPress Plugin.
 
-1. Upload `wp-qore` to the `/wp-content/plugins/` directory
+1. Upload `wp-cache.com` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Adjust options within 'WP-Cache.com' admin menu
 
@@ -14,7 +14,7 @@ Once activated, please update your options via the WP-Cache.com menu located wit
 
 ## License
 
-WP Qore is licensed under the GPL v3 or later.
+WP-Cache.com is licensed under the GPL v3 or later.
 
 > This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 3, as
