@@ -14,6 +14,8 @@
 		public function __construct(){
 			add_action('init', array($this, 'add_localization') );
 			$this->Set_WP_Con_DIR();
+			$this->Set_WP_Blog_Path();
+			$this->Set_WP_Domain();
 			$this->Set_Options();
 			$this->Detect_New_Post();
 			$this->Check_Cron_Time();
@@ -100,6 +102,69 @@
 
 		public function Set_WP_Con_DIR(){
 			$this->WP_con_DIR = ABSPATH."wp-content";
+		}
+
+		/**
+		 * Set Cache Path
+		 *
+		 * This function provides compatibility for
+		 * WordPress Networks.
+		 *
+		 * Author: José SAYAGO
+		 * URI: http://laelite.info
+		 * Email: opensource@laelite.info
+		 */
+		public function Set_WP_Blog_Path(){
+			// WordPress Network?
+			if( is_multisite() == true ) {
+				// Get Global Blog Info
+				global $current_blog;
+				// Subdomains?
+				if( is_subdomain_install() == true ) {
+					// Set subdomain as folder name
+					$blog_path = $current_blog->domain;
+				} else {
+					// Set path as folder name
+					$blog_path = $current_blog->path;
+				}
+				// If path is root
+				if( $blog_path == '/') {
+					// Set root as folder name
+					$blog_path = 'root';
+				}
+			} else {
+				// Use all for single installations
+				$blog_path = 'all';
+			}
+			$this->WP_blog_Path = $blog_path;
+		}
+		/**
+		 * Set WordPress Domain
+		 *
+		 * Detect site domain to correctly serve
+		 * cached files. Required for WordPress Network
+		 * compatibility.
+		 *
+		 * Author: José SAYAGO
+		 * URI: http://laelite.info
+		 * Email: opensource@laelite.info
+		 */
+		public function Set_WP_Domain(){
+			// WordPress Network
+			if( is_multisite() == true ) {
+				global $current_blog;
+				if( is_subdomain_install() == true ) {
+					// Get the domain
+					$blog_url = $current_blog->domain;
+				} else {
+					// Get the base domain + path
+					$blog_url = $current_blog->domain.$current_blog->path;
+				}
+			} else {
+				// WordPress base domain without www
+				$blog_url =  preg_replace('/^www\./','',$_SERVER['SERVER_NAME']);
+			}
+			$this->WP_blog_Url = $blog_url;
 		}
 
 		public function add_Options_panel(){
@@ -195,7 +260,7 @@
 <i><?php _e( 'Target folder:', 'wpcache' ); ?></i><br>
 
 <pre style="margin-top:10px;background:#FFFFFF;padding:10px;border: 1px dashed #CCCCCC;">
-<b><?php echo $this->WP_con_DIR; ?>/cache/all</b>
+<b><?php echo $this->WP_con_DIR.'/cache/'.$this->WP_blog_Path; ?></b>
 </pre>
 
 </label>
@@ -241,14 +306,14 @@ border-top: 1px solid #e1e1e1;
 		}
 
 		public function deleteCache(){
-			if(is_dir($this->WP_con_DIR."/cache/all")){
-				//$this->rm_folder_recursively($this->WP_con_DIR."/cache/all");
+			if(is_dir($this->WP_con_DIR."/cache/".$this->WP_blog_Path)){
+				//$this->rm_folder_recursively($this->WP_con_DIR."/cache/".$this->WP_blog_Path);
 				if(is_dir($this->WP_con_DIR."/cache/tmpWPCache")){
-					rename($this->WP_con_DIR."/cache/all", $this->WP_con_DIR."/cache/tmpWPCache/".time());
+					rename($this->WP_con_DIR."/cache/".$this->WP_blog_Path, $this->WP_con_DIR."/cache/tmpWPCache/".time());
 					wp_schedule_single_event(time() + 60, $this->slug."TmpDelete");
 					$this->System_Message = array("All cache files have been deleted","success");
 				}else if(@mkdir($this->WP_con_DIR."/cache/tmpWPCache", 0755, true)){
-					rename($this->WP_con_DIR."/cache/all", $this->WP_con_DIR."/cache/tmpWPCache/".time());
+					rename($this->WP_con_DIR."/cache/".$this->WP_blog_Path, $this->WP_con_DIR."/cache/tmpWPCache/".time());
 					wp_schedule_single_event(time() + 60, $this->slug."TmpDelete");
 					$this->System_Message = array( __( 'All cache files have been deleted', 'wpcache' ),"success");
 				}else{
@@ -380,7 +445,7 @@ border-top: 1px solid #e1e1e1;
 		}
 		
 		public function insertRewriteRule($htaccess){
-			preg_match("/wp-content\/cache\/all/", $htaccess, $check);
+			preg_match("/wp-content\/cache\/".$this->WP_blog_Path."/", $htaccess, $check);
 			if(count($check) === 0){
 				$htaccess = $this->getHtaccess().$htaccess;
 			}else{
@@ -394,13 +459,14 @@ border-top: 1px solid #e1e1e1;
 					"<IfModule mod_rewrite.c>"."\n".
 					"RewriteEngine On"."\n".
 					"RewriteBase /"."\n".
+					"RewriteCond %{HTTP_HOST} ^(www\.)?".$this->WP_blog_Url."\.com [NC]"."\n".
 					"RewriteCond %{REQUEST_METHOD} !POST"."\n".
 					"RewriteCond %{QUERY_STRING} !.*=.*"."\n".
 					"RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$"."\n".
 					'RewriteCond %{HTTP:X-Wap-Profile} !^[a-z0-9\"]+ [NC]'."\n".
 					'RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]'."\n".
-					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/all/".$this->getRewriteBase()."$1/index.html -f"."\n".
-					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/all/'.$this->getRewriteBase().'$1/index.html" [L]'."\n".
+					"RewriteCond %{DOCUMENT_ROOT}/".$this->getRewriteBase()."wp-content/cache/".$this->WP_blog_Path."/".$this->getRewriteBase()."$1/index.html -f"."\n".
+					'RewriteRule ^(.*) "/'.$this->getRewriteBase().'wp-content/cache/'.$this->WP_blog_Path.'/'.$this->getRewriteBase().'$1/index.html" [L]'."\n".
 					"</IfModule>"."\n".
 					"# END WPCache"."\n";
 			return $data;
@@ -433,7 +499,6 @@ border-top: 1px solid #e1e1e1;
 
 		public function callback($buffer){
 			$buffer = $this->checkShortCode($buffer);
-
 			if(defined('DONOTCACHEPAGE')){ // for Wordfence: not to cache 503 pages
 				return $buffer;
 			}else if(is_404()){
@@ -447,7 +512,7 @@ border-top: 1px solid #e1e1e1;
 			}else if($this->checkHtml($buffer)){
 				return $buffer;
 			}else{
-				$cachFilePath = $this->WP_con_DIR."/cache/all".$_SERVER["REQUEST_URI"];
+				$cachFilePath = $this->WP_con_DIR."/cache/".$this->WP_blog_Path.$_SERVER["REQUEST_URI"];
 				$content = $this->cacheDate($buffer);
 				$this->createFolder($cachFilePath, $content);
 
